@@ -16,6 +16,8 @@ Including another URLconf
 
 from account.views import (
     registration_view,
+    login_request,
+    logout_request,
 )
 
 from django.contrib import admin
@@ -25,7 +27,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('MyChat/', include('chat.urls'), name="home"),
+    path('MyChat/', include('chat.urls'), name="start"),
+    path('MyChat/chat/', include('chat.urls'), name="home"),
     path('admin/', admin.site.urls),
-    path('register/', registration_view, name="register")
+    path('register/', registration_view, name="register"),
+    path('login/', login_request, name="login"),
+    path('logout/', logout_request, name="logout"),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
