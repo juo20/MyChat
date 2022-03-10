@@ -8,6 +8,5 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = Account
-        field = ("email", "username", "password1", "password2")
-        exclude = ()
+        fields = ["email", "username", "password1", "password2"]
 
