@@ -1,4 +1,4 @@
-<h2>Register</h2>
+<h2>Login</h2>
 <form method="POST">
 	{% csrf_token %}
 	{% for field in form %}
@@ -15,5 +15,6 @@
 		</p>
 	{% endfor %}
 
-	<button type="submit">Register</button>
+	<button type="submit">Login</button>
+	<p>Click <a href="/register">here</a> if you don't have an account</p>
 </form>
