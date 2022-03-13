@@ -1,21 +1,39 @@
-<h2>Register</h2>
-<form method="POST">
-	{% csrf_token %}
-	{% for field in registration_form %}
-		<p>
-			{{field.label_tag}}
-			{{field}}
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+    
+    .form-container {
+        margin:			10% auto;
+        display:		block;
+        width:			400px;
+        text-align:		center;
+        font-family: 	Arial;
+    }
+    </style>
+</head>
+<body>
+<div class="form-container">
+	<h1>Sign up</h1>
+	<form method="POST">
+		{% csrf_token %}
+		
+		{% for field in registration_form %}
+			<p>
+			
+				{{field}}
+				
+				{% for error in field.errors %}
+					<p type="color: red;">{{error}}</p>
+				{% endfor %}
+			</p>
+		{% endfor %}
 
-			{% if  field.help_text %}
-				<small type="color: grey;">{{field.help_text}}</small>
-			{% endif %}
-			{% for error in field.errors %}
-				<p type="color: red;">{{error}}</p>
-			{% endfor %}
-		</p>
-	{% endfor %}
+		<button type="submit">Register</button>
 
-	<button type="submit">Register</button>
-
-	<p>Click <a href="/login">here</a> if you already have an account</p>
-</form>
+		<p>Click <a href="/login">here</a> if you already have an account</p>
+		
+	</form>
+</div>
+</body>
+</html>

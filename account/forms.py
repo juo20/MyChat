@@ -5,15 +5,34 @@ from django.contrib.auth import authenticate
 from account.models import Account
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(max_length=60, help_text='Required email address')
+    email = forms.EmailField(
+            max_length=60,
+            widget=forms.TextInput(attrs={'placeholder':'Email'})
+    )
+    username = forms.CharField(
+            widget=forms.TextInput(attrs={'placeholder':'Username'})
+    )
+    password1 = forms.CharField(
+        widget=forms.TextInput(attrs={'type':'password', 'placeholder':'Password'})
+    )
+    password2 = forms.CharField(
+        widget=forms.TextInput(attrs={'type':'password', 'placeholder':'Password confirm'})
+    )
+
 
     class Meta:
         model = Account
-        fields = ["email", "username", "is_admin", "password1", "password2"]
+        fields = ["email", "username", "password1", "password2"]
 
 # Tried to overwrite AuthenticationForm but its not really working yet
 class AuthForm(forms.ModelForm):
-    password = forms.CharField(max_length=60, help_text='Enter pw')
+    email = forms.EmailField(
+            max_length=60,
+            widget=forms.TextInput(attrs={'placeholder':'Email'})
+    )
+    password = forms.CharField(
+        widget=forms.TextInput(attrs={'type':'password', 'placeholder':'Password'})
+    )
 
     class Meta:
         model = Account
