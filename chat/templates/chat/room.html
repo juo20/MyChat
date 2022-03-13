@@ -4,10 +4,72 @@
 <head>
     <meta charset="utf-8"/>
     <title>Chat Room</title>
+
+    <style type="text/css">
+        /* Define the main Navigation block */
+        body {
+            margin: auto;
+            padding: auto;
+            background-color: lightgrey;
+        }
+        .myNav {
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            background-color: black;
+            
+        }
+        /* Remove bullets, margin and padding */
+        ul {
+            list-style: none;
+            margin: auto;
+            padding: auto;
+        }
+
+        a {
+            font-family: Arial;
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        #logout {
+            float: right;
+            
+        }
+        #home {
+            float: left;
+            
+        }
+        #chat-log {
+            resize: none;
+            margin: 0;
+            width: 50%;
+            height: 40em;
+        }
+
+        #chat-message-input{
+            width: 50%;
+        }
+
+        #user {
+            float: left;
+        }
+    </style>
 </head>
 <body>
-    <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
+
+    <nav class="myNav">                                 <!-- Any element can be used here -->
+        <ul>
+            <li><a id="home" href="/MyChat/chat/">Home</a></li>
+            <li><a id="user" href="#">Logged in as: {{ request.user.username }} in {{room_name}}</a></li>
+
+            <li><a id="logout" href="/login/">Logout</a></li>
+            
+        </ul>
+    </nav>
+
+    <textarea id="chat-log" readonly></textarea><br>
+    <input id="chat-message-input" type="text"><br>
     <input id="chat-message-submit" type="button" value="Send"> 
     
     {{ room_name|json_script:"room-name" }}
@@ -41,7 +103,13 @@
         document.querySelector('#chat-message-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
 
+
             const message = messageInputDom.value;
+            //var user = {{ request.user.username }};
+            //var str = Array.from(messageInputDom.value);
+            //var message = str.toString() + user.toString();
+
+
             chatSocket.send(JSON.stringify({
                 'message': message
             }));
