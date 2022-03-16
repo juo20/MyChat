@@ -11,8 +11,36 @@
         display:        block;
         width:          400px;
         text-align:     center;
-        font-family:    Arial;
     }
+    .fontstyle {
+        font-family: monospace;
+    }
+    body {
+        background: black;
+    }
+
+    p {
+        color: white;
+    }
+    .myNav {
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            background-color: black;
+        }
+        ul {
+            list-style: none;
+            margin: auto;
+            padding: auto;
+        }
+        
+        #logout {
+            float: right;
+            color: red;
+        }
+        a {
+            text-decoration: none;
+        }
     </style>
 
     <!--<script src="http://http://127.0.0.2:8080/static/js/chatroom-setup.js"></script>-->
@@ -20,13 +48,20 @@
 
 </head>
 <body>
+    <nav class="myNav">                                
+        <ul>
+
+            <li><a class="fontstyle" id="logout" href="{% url 'logout' %}">Logout</a></li>
+            
+        </ul>
+    </nav>
 	<div class="form-container">
 		
-    	<p>What chat room would you like to enter?</p>
+    	<p class="fontstyle" style="font-size: 16px">What chat room would you like to enter?</p>
     	
-        <input id="room-name-input" type="text" size="100">
+        <input class="fontstyle" id="room-name-input" type="text" placeholder="Enter chat room...">
 
-        <input id="room-name-submit" type="button" value="Enter">
+        <input class="fontstyle" id="room-name-submit" type="button" value="Enter">
         	
 	</div>
     <!-- This part does not work in the header and sadly failed to be served externally by nginx, gotta retry sometime-->
@@ -40,7 +75,14 @@
 
         document.querySelector('#room-name-submit').onclick = function(e) {
             var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/MyChat/chat/' + roomName + '/';
+            if (roomName.indexOf(' ') < 0) {
+                window.location.pathname = '/MyChat/chat/' + roomName + '/';
+            } else {
+                var div = document.getElementsByTagName('div'),
+                p = document.createElement("p");
+                p.innerHTML = 'Remove the whitespace';
+                div[0].append(p);
+            }
         };
 
     </script>

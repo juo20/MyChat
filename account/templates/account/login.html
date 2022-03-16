@@ -9,7 +9,15 @@
         display: block;
         width:400px;
         text-align:center;
-        font-family: Arial;
+        font-family: monospace;
+    }
+    body {
+        background: black;
+        color: white;
+    }
+    a, pre {
+        color: red;
+        text-decoration: none;
     }
     </style>
 </head>
@@ -57,8 +65,9 @@
             </p>
         {% endfor %}
                 <button type="submit">Login</button>
-                <p>Click <a href="/register">here</a> if you don't have an account</p>
+                <p>Click <a href="/register">here</a> to sign up.</p>
     </div>
+    
     
 	
 </form>

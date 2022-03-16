@@ -6,72 +6,102 @@
     <title>Chat Room</title>
 
     <style type="text/css">
-        /* Define the main Navigation block */
+        html, body {
+            background-color: black;
+            margin: 0;
+            height: 100%;
+            min-height: 100%;
+        }
         body {
-            margin: auto;
-            padding: auto;
-            background-color: lightgrey;
+            display: flex;
+            flex-direction: column;
+        }
+        footer {
+            flex: none;
+        }
+        main {
+            flex: auto;
         }
         .myNav {
-            display: block;
-            height: 50px;
-            line-height: 50px;
+            position: relative;
+            overflow: hidden;
+            padding: 10px;
             background-color: black;
-            
         }
-        /* Remove bullets, margin and padding */
-        ul {
-            list-style: none;
-            margin: auto;
-            padding: auto;
-        }
-
         a {
-            font-family: Arial;
+            font-family: monospace;
+            font-size:12px;
+            font-weight:normal;
             color: white;
-            padding-left: 20px;
-            padding-right: 20px;
+            text-decoration: none;
         }
         #logout {
             float: right;
-            
+           
         }
         #home {
             float: left;
-            
+        }
+        #user {
+            align-self: center;
         }
         #chat-log {
+            height: 100%;
+            width: 80%;
             resize: none;
             margin: 0;
-            width: 50%;
-            height: 40em;
+            padding: 0;
+            border: 0;
+            overflow: hidden;
+        }
+        #chat-message-input {
+            width: 80%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .press{
+            outline-width: 0;
         }
 
-        #chat-message-input{
-            width: 50%;
+        .press:focus{
+            outline: none;
+        }
+        .nav-centered a{
+            float:  none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .nav-left{
+            padding-left: 10px;
+        }
+        .nav-right {
+            padding-right: 10px;
+            padding-bottom: 10px;
         }
 
-        #user {
-            float: left;
-        }
     </style>
 </head>
 <body>
 
-    <nav class="myNav">                                 <!-- Any element can be used here -->
-        <ul>
-            <li><a id="home" href="/MyChat/chat/">Home</a></li>
-            <li><a id="user" href="#">Logged in as: {{ request.user.username }} in {{room_name}}</a></li>
+    <div class="myNav">                                
+            <div class="nav-left" ><a id="home" href="/MyChat/chat/">Home</a></div>
+            <div class="nav-centered" ><a id="user" href="#">User: {{ request.user.username }}</a></div>
+            <div class="nav-right" ><a id="logout" href="{% url 'logout' %}">Logout</a></div>     
+    </div>
 
-            <li><a id="logout" href="/login/">Logout</a></li>
-            
-        </ul>
-    </nav>
 
-    <textarea id="chat-log" readonly></textarea><br>
-    <input id="chat-message-input" type="text"><br>
-    <input id="chat-message-submit" type="button" value="Send"> 
-    
+    <main class="grid-container">
+        <textarea class="press" id="chat-log" readonly></textarea>    
+    </main>
+
+    <footer>
+        <input class="press" id="chat-message-input" type="text">
+        <input id="chat-message-submit" type="button" value="Send"> 
+    </footer>
+        
     {{ room_name|json_script:"room-name" }}
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
