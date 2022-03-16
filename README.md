@@ -13,6 +13,9 @@ git clone https://github.com/juo20/MyChat.git
 3. Create and activate virtual environment
 ```python
 python3 -m venv path
+```
+
+``python
 source path/bin/activate
 ```
 3. Install pip requirements
@@ -23,7 +26,11 @@ pip install -r /path/to/requirements.txt
 ```python
 python3 manage.py migrate
 ```
-5. Run django server
+5. Make sure to have docker installed and run a redis container
+```
+docker run -dp 6379:6379 redis
+```
+7. Run django server
 ```python
 python3 manage.py runserver
 ```
