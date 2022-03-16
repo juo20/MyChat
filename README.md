@@ -14,8 +14,7 @@ git clone https://github.com/juo20/MyChat.git
 ```python
 python3 -m venv path
 ```
-
-``python
+```python
 source path/bin/activate
 ```
 3. Install pip requirements
