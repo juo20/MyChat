@@ -1,3 +1,4 @@
+psycopg2==2.9.3               
 channels_redis==3.3.1
 Django==3.2.8
 selenium==4.1.2               
