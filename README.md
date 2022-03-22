@@ -36,11 +36,14 @@ python3 manage.py runserver
 
 # Issues I need to amend
 
-* Fix room name issue when there is whitespace
-* Have the chat text area scroll with message when the end of the box is reached
-* Add form validation + error messages for input fields
-* Display username instead of email in chat room
-* Find a way to display all current users in a chat room
-* Restrict URL access
-* Fix the horrendous test case + add some actual useful ones
-* Fix github workflow
+- [ ] Fix room name issue when there is whitespace
+- [ ] Have the chat text area scroll with message when the end of the box is reached
+- [ ] Add form validation + error messages for input fields
+- [ ] Display username instead of email in chat room
+- [ ] Find a way to display all current users in a chat room
+- [ ] Restrict URL access
+- [ ] Fix the horrendous test case + add some actual useful ones
+- [ ] Fix github workflow
+- [x] Replace sqlite with postgresql
+- [x] Add dockerfiles
+
