@@ -1,4 +1,5 @@
 # To ignore certain files for the COPY command
+Dockerfile
 docker-compose.yml
 .git/*
 .github/*

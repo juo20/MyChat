@@ -12,21 +12,32 @@ services:
 
     redis:
         image: redis:latest
+        hostname: redis_db
         ports:
             - 6379:6379
+
     database:
         image: postgres:latest
         environment:
+            POSTGRES_HOST: database
             POSTGRES_USER: DB_USER
             POSTGRES_PASSWORD: DB_PASSWORD
             POSTGRES_DB: DB_TEST
-        hostname: localhost
+        hostname: database
         ports:
             - 5432:5432 
 
     webapp:
         build: .
+        image: app
         ports:
             - 8000:8000
-    
+        command: >
+            sh -c "./wait-for-it.sh database:5432 --  python3 manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+        depends_on:
+            - database
+        links:
+            - database
+   
 
