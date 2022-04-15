@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import AuthenticationForm
 from account.forms import RegistrationForm, AuthForm
 from django.contrib import messages
+
 
 def registration_view(request):
     context = {}
@@ -22,10 +22,12 @@ def registration_view(request):
         context['registration_form'] = form
     return render(request, 'account/register.html', context)
 
+
 def logout_request(request):
     logout(request)
     messages.info(request, "logged out successfully")
     return redirect("/login")
+
 
 def login_request(request):
     context = {}
@@ -46,4 +48,3 @@ def login_request(request):
         form = AuthForm()
     context['form'] = form
     return render(request, 'account/login.html', context)
-
