@@ -22,9 +22,8 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = Account
-        fields = ["email", "username", "password1", "password2"]
+        fields = ['email', 'username', 'password1', 'password2']
 
-# Tried to overwrite AuthenticationForm but its not really working yet
 class AuthForm(forms.ModelForm):
     email = forms.EmailField(
             max_length=60,
@@ -36,7 +35,7 @@ class AuthForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ["email", "password"]
+        fields = ['email', 'password']
 
     def clean(self):
         if self.is_valid():
@@ -44,6 +43,6 @@ class AuthForm(forms.ModelForm):
             password = self.cleaned_data.get('password')
             user = authenticate(email=email, password=password)
             if not user or not user.is_active:
-                raise forms.ValidationError("lmao")
-            #return self.cleaned_data
+                raise forms.ValidationError('User is inactive')
+            return self.cleaned_data
 
